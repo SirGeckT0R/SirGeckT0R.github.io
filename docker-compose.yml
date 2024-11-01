@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: test_admin
+      POSTGRES_PASSWORD: test_1234
+      POSTGRES_DB: test_lab4_1
+      PGPORT: 5433
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_PORT: 5433
+      DB_USER: test_admin
+      DB_PASSWORD: test_1234
+      DB_NAME: test_lab4_1
+    ports:
+      - '8888:8888'
+    depends_on:
+      - db
