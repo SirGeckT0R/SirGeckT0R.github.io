@@ -2,7 +2,7 @@ FROM node:14
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json .
 
 RUN npm install
 
@@ -12,4 +12,4 @@ COPY wait-for-it.sh ./
 RUN chmod +x wait-for-it.sh
 
 EXPOSE 8888
-CMD ["./wait-for-it.sh", "db", "--", "node", "server.js"]
+CMD ["bash", "wait-for-it.sh", "db", "--", "node", "server.js"]

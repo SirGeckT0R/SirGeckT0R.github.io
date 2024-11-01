@@ -109,6 +109,8 @@ exports.signin = (req, res) => {
           id: user.id,
           username: user.username,
           email: user.email,
+          refreshToken: user.refreshToken,
+          expiresRefreshToken: user.expiresRefreshToken,
           roles: authorities,
         });
       });
@@ -152,7 +154,7 @@ exports.refreshToken = (req, res) => {
         sameSite: 'Strict',
         maxAge: 60 * 1000,
       });
-      res.status(200).send();
+      res.status(200).send({ message: 'Refresh successful' });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
@@ -160,12 +162,10 @@ exports.refreshToken = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  let refreshToken = req.cookies['refresh-token'];
-
-  res.header('Authorization', null);
+  const refreshToken = req.cookies['refresh-token'];
 
   if (!refreshToken) {
-    return res.status(200).send({ message: 'Logout successful' });
+    return res.status(200).send({ message: 'No token, Logout successful' });
   }
 
   User.findOne({
@@ -174,16 +174,30 @@ exports.logout = (req, res) => {
     },
   })
     .then((user) => {
-      if (!user) {
+      if (user) {
         user.update({
           refreshToken: null,
           expiresRefreshToken: null,
         });
 
-        res.clearCookie('refresh-token');
+        res.cookie('refresh-token', '', {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'Strict',
+          maxAge: 0,
+        });
+
+        res.cookie('access-token', '', {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'Strict',
+          maxAge: 0,
+        });
+
+        return res.status(200).send({ message: 'Logout successful with user' });
       }
 
-      res.status(200).send({ message: 'Logout successful' });
+      return res.status(200).send({ message: 'Logout successful' });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
