@@ -1,9 +1,8 @@
 module.exports = {
-  HOST: process.env.DB_HOST || 'localhost',
-  PORT: process.env.DB_PORT || '5433',
-  USER: process.env.DB_USER || 'test_admin',
-  PASSWORD: process.env.DB_PASSWORD || 'test_1234',
-  DB: process.env.DB_NAME || 'test_lab4_1',
+  HOST: process.env.DB_HOST || 'mouse.db.elephantsql.com',
+  USER: process.env.DB_USER || 'dtiafvzm',
+  PASSWORD: process.env.DB_PASSWORD || 'sN_m_1h4IPhcszfkY7Zd9QFo9PU4adRz',
+  DB: process.env.DB_NAME || 'dtiafvzm',
   dialect: 'postgres',
   pool: {
     max: 5,
