@@ -31,7 +31,11 @@ jobs:
         env:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           USER_NAME: ${{ secrets.USER_NAME }}
-          USER_TOKEN: ${{ secrets.OKEN }}
+<<<<<<< HEAD
+          USER_TOKEN: ${{ secrets.TOKEN }}
+=======
+          USER_TOKEN: ${{ secrets.USER_TOKEN }}
+>>>>>>> c92624f62a530951435fae3ef282d3be9692272c
         if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name $USER_NAME
@@ -42,7 +46,11 @@ jobs:
       - name: Sync to Glitch Project
         uses: wei/git-sync@v3
         with:
+<<<<<<< HEAD
           source_repo: https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git
+=======
+          source_repo: https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+>>>>>>> c92624f62a530951435fae3ef282d3be9692272c
           source_branch: main
           destination_repo: ${{ secrets.GLITCH_GIT_URL }}
           destination_branch: master
