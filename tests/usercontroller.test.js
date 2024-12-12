@@ -21,7 +21,7 @@ describe('User Controller', () => {
     it('should return 200 with the correct message', async () => {
       const res = await request(app).get('/user');
       expect(res.status).toBe(200);
-      expect(res.text).toBe('Test User lab6.');
+      expect(res.text).toBe('Test User l.');
     });
   });
 

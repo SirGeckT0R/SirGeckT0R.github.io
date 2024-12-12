@@ -20,13 +20,17 @@ const Role = db.role;
 
 const PORT = process.env.PORT || 8888;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
-db.sequelize.sync({ force: true }).then(() => {
-  console.log('Drop and Resync Database with { force: true }');
-  initial();
+  if (process.env.NODE_ENV == 'test') {
+    console.log(`Server is running on port ${PORT}.`);
+  }
 });
 
+if (process.env.NODE_ENV == 'test') {
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log('Drop and Resync Database with { force: true }');
+    initial();
+  });
+}
 app.get('/', (req, res) => {
   res.json({ message: 'Test lab 6!' });
 });
