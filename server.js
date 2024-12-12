@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 let corsOptions = {
-  origin: 'http://localhost:8888',
+  origin: 'https://cultured-abaft-antimony.glitch.me',
 };
 
 app.use(cors(corsOptions));
@@ -24,7 +24,7 @@ db.sequelize.sync({ force: true }).then(() => {
 });
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Test lab 4!' });
+  res.json({ message: 'Test lab 6!' });
 });
 
 require('./app/routes/auth.routes')(app);
