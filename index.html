@@ -16,7 +16,7 @@
 
         <script>
             document.querySelector('#show-data').addEventListener('click', () => {
-                fetch('http://localhost:8888/api/test/all')
+                fetch('http://cultured-abaft-antimony.glitch.me/api/test/all')
                     .then(response => response.text())
                     .then(data => {
                         document.querySelector('h1').innerText = data;
