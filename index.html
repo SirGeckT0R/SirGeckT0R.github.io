@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <title>Lab 6</title>
+    </head>
+
+    <body>
+        <button id="show-data">click to show data</button>
+        <h1></h1>
+
+        <script>
+            document.querySelector('#show-data').addEventListener('click', () => {
+                fetch('http://cultured-abaft-antimony.glitch.me/api/test/all')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.querySelector('h1').innerText = data;
+                    });
+            });
+        </script>
+    </body>
+
+</html>
