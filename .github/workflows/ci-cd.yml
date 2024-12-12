@@ -27,6 +27,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Run tests
+        run: npm run test
+
       - name: Deploy to GitHub Pages
         env:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
