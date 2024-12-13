@@ -8,8 +8,6 @@ verifyToken = (req, res, next) => {
 
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
-      next();
-
       return res.status(401).send({
         message: 'Unauthorized!',
       });
@@ -19,20 +17,18 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then((user) => {
-    user.getRoles().then((roles) => {
+isAdmin = async (req, res, next) => {
+  await User.findByPk(req.userId).then((user) => {
+    return user.getRoles().then((roles) => {
       for (let i = 0; i < roles.length; i++) {
         if (roles[i].name === 'admin') {
           next();
           return;
         }
       }
-
       res.status(403).send({
         message: 'Require Admin Role!',
       });
-      return;
     });
   });
 };
