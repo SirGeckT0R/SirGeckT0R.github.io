@@ -5,7 +5,10 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 let corsOptions = {
-  origin: 'https://cultured-abaft-antimony.glitch.me',
+  origin: [
+    'https://cultured-abaft-antimony.glitch.me',
+    'https://sirgeckt0r.github.io',
+  ],
 };
 
 app.use(cors(corsOptions));
