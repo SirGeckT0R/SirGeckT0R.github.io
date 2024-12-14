@@ -31,7 +31,7 @@ db.sequelize.sync({ force: true }).then(() => {
   initial();
 });
 app.get('/', (req, res) => {
-  res.json({ message: 'Test lab 6!' });
+  res.status(200).sendFile('index.html');
 });
 
 require('./app/routes/auth.routes')(app);
