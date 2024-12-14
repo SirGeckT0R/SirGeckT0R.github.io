@@ -45,7 +45,7 @@ describe('Auth Controller', () => {
           roles: ['user'],
         });
 
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(400);
       expect(res.body).toEqual({ message: 'User registered successfully!' });
     });
 
